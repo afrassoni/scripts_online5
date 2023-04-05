@@ -1,0 +1,8 @@
+'reinit'
+'open /stornext/grupos/catt-brams/ariane.frassoni/GD/bin/novo_entranhamento/merge/ANL_EN/20100101/GD-precip-EN-ensfisfy30-A-2010-01-02-120000-g1.ctl'
+'open /stornext/grupos/catt-brams/ariane.frassoni/GD/bin/novo_entranhamento/merge/ANL_EN/20100101/GD-precip-EN-ensfisfy30-A-2010-01-03-120000-g1.ctl'
+'set gxout fwrite'
+'set fwrite /stornext/grupos/catt-brams/ariane.frassoni/GD/bin/novo_entranhamento/merge/ANL_EN/20100101/tmp.bin'
+'d (precip.2(t=1)-precip.1(t=1))'
+'disable fwrite'
+'quit'
