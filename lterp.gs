@@ -1,0 +1,8 @@
+'reinit'
+'open /stornext/grupos/catt-brams/ariane.frassoni/dados_obs/merge/200601/prec_20060101.ctl'
+'open /stornext/grupos/catt-brams/ariane.frassoni/GD/ramspost/novo_entranhamento/ANL_AS/20050131/GD-precip-AS-ensfis-A-2005-02-01-120000-g1.ctl'
+'set gxout fwrite'
+'set fwrite /stornext/grupos/catt-brams/ariane.frassoni/GD/bin/novo_entranhamento/merge/ANL_AS/20050131/GD-precip-AS-ensfis-A-2005-02-01-120000-g1.bin'
+'d lterp(precip.2(t=1),prec.1)'
+'disable fwrite'
+'quit'
