@@ -1,5 +1,6 @@
 #! /bin/bash -x
 
+
 #
 # -- Inicializando Modules Environment
 #
