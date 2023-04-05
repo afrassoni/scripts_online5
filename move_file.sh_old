@@ -1,0 +1,64 @@
+#! /bin/sh -x
+#=================================================
+# Funcao para fazer o backup
+#
+
+function backup() {
+file=${1}
+size=${2}
+dir=${3}
+
+tam=`du -sk ${file} | awk '{print $1}' `
+if [ $tam -ge ${size} ];then
+	mv ${file} ${dir}
+else
+   echo " Tamanho Inesperado : $size"
+   echo "esperando 1 minuto para mover o arquivo"
+	sleep 1m
+	backup ${file} ${size} ${dir}
+fi
+}
+#==================================================
+
+tstart=2006103100
+tfinal=2006110100
+incr="24 hour"
+CLTYPE="EN"
+
+
+DATAIN=/scratch1/grupos/catt-brams/home/ariane.frassoni/anl/ANL_EN_orig
+DATAOUT=/stornext/grupos/catt-brams/ariane.frassoni/ANL/ANL_${CLTYPE}_orig 
+
+while [ $tstart != $tfinal ];do
+   
+   time=${tstart:0:8}
+
+   if [ ! -e ${DATAOUT}/${time} ];then mkdir -p ${DATAOUT}/${time};fi
+
+   if [ -e ${DATAIN}/${time} ];then 
+      nfile=`ls -1 ${DATAIN}/${time}/* | wc -l`
+   else
+      nfile=0
+   fi
+
+   if [ ${nfile} == 6 ]; then
+
+	ls -1 ${DATAIN}/${time}/*.vfm | while read file; do
+		backup ${file} 618672 ${DATAOUT}/${time}
+	done
+
+	ls -1 ${DATAIN}/${time}/*.txt | while read file; do
+		backup ${file} 72 ${DATAOUT}/${time} 
+	done
+
+ 	tstart=`inctime ${tstart} +${incr} yyyymmddhh`
+
+   else
+
+        sleep 1m
+
+   fi
+      
+
+done
+
